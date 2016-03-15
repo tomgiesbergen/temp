@@ -14,7 +14,8 @@
         .padding.noTop{
             padding-top:0px;
         }
-        #container{height:auto; background-color:green; position:fixed; width:100%; left:0px; right:0px;}
+        #container{height:auto; background-color:green; position:fixed; width:100%; left:0px; right:0px; margin-bottom:auto;}
+        .stickyPusher{float:left; width:100%;}
     </style>
 </head>
 <body>
@@ -30,11 +31,20 @@
             </div>
         </div>
     </div>
+    <div class="stickyPusher"></div>
+    <div class="row">
+        <p>asdfasdfasdf</p>
+    </div>
     <div style="width:100%; height:6000px; float:left;"></div>
     <script>
-        jQuery(window).scroll(function () {
+        var stickyMenu;
+        jQuery(document).ready(function () {
             // Sticky menu
-            var stickyMenu = jQuery("#container .sticky");
+            stickyMenu = jQuery("#container .sticky");
+            jQuery(".stickyPusher").height(stickyMenu.height() + parseInt(stickyMenu.css("paddingTop").replace("px", "")));
+        });
+
+        jQuery(window).scroll(function () {
             // On every scroll
             if (jQuery(this).scrollTop() > jQuery("#container").height()) {
                 // Als je meer scrollt dan de stickyContainer hoog is, verwijder de marginTop
@@ -43,7 +53,7 @@
                 // Als je weer naar boven scrollt
                 stickyMenu.removeClass("noTop");
             }
-        })
+        });
     </script>
 </body>
 </html>
